@@ -1,0 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background-image: url('https://assets.themortgagereports.com/wp-content/themes/community_updated/public/img/bg_header-bubble.svg');
+    background-size: cover;
+}

@@ -1,0 +1,87 @@
+body {
+    background-image: url('https://assets.themortgagereports.com/wp-content/themes/community_updated/public/img/bg_header-bubble.svg');
+    background-size: cover;
+}
+.main_body {
+    width: 70%;
+    margin: 20px auto;
+    background:white;
+    box-shadow: 0 0 10px lightgrey;
+    border-radius: 15px;
+    padding-bottom: 30px;
+}
+.header_logo {
+    padding: 15px 0;
+}
+.header_logo p {
+    text-align: center;
+    margin:0;
+}
+.header_logo img {
+    border-radius: 50%;
+}
+.after_header {
+    margin:auto;
+}
+hr {
+    background-image: linear-gradient(90deg,transparent,lightgrey, transparent);
+    border: 0;
+    height: 3px;
+}
+.tagline_heading {
+    text-align: center;
+    font-size: 24px;
+    padding: 15px 0;
+    font-weight: thin;
+    margin-bottom: 0;
+}
+.about {
+    margin:20px auto;
+    text-align: center;
+}
+.description,
+.create_btn  {
+    margin:auto;
+    padding: 40px 0;
+}
+/* form styling */
+.form_decide,.form_body {
+    margin:auto;
+}
+.add_person_btn {
+    padding:5px 25px;
+}
+.person_card {
+    margin: 30px auto;
+    padding: 10px;
+    box-shadow: 0 0 15px lightgrey;
+    border-radius: 6px;
+}
+.report_card {
+    width: 80%;
+    margin: 40px auto;
+    background: #E2F6FE;
+    padding: 5px;
+    border: 1px solid #b5e9fc;
+    border-radius: 6px;
+}
+.who_pays_how_much {
+    text-align: center;
+    padding: 5px;
+    border-bottom: 1px solid #b5e9fc;
+}
+.amount_paid { 
+    border-bottom: 1px solid #b5e9fc;
+    margin:auto -5px;
+}
+.amount_paid p {
+    margin-bottom: 0;
+    font-size: 12px;
+    padding:5px;
+    text-align: center;
+}
+.amount_value {
+    color:#579cb5;
+    background: #c3e0eb;
+    text-align: center;
+}
