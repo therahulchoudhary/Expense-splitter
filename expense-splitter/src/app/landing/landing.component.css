@@ -5,6 +5,8 @@
     box-shadow: 0 0 10px lightgrey;
     border-radius: 15px;
     padding-bottom: 30px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/wikimania2014/7/7a/WM_Main_background_v5.svg');
+    background-size: cover;
 }
 .header_logo {
     padding: 15px 0;
