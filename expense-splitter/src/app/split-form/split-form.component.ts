@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/forms';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, FormControl,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-split-form',
@@ -7,67 +7,74 @@ import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/for
   styleUrls: ['./split-form.component.css']
 })
 export class SplitFormComponent implements OnInit {
-  personsForm : FormGroup;
-  individualTotal : number=0;
   tcode : string;
-  arrayValue : string;
-  previousValue : number=0;
-  constructor(private fb : FormBuilder) {
-    var i;
-    // this.personsForm = this.fb.group({
-    //   howMuch: this.fb.array([
-    //     this.fb.control(null)
-    //   ])      
-    // });   
-    this.personsForm = this.fb.group({
-      person: this.fb.array([
-        this.fb.control(null)
-      ]),
-      howMuch: this.fb.array([
-        this.fb.control(null)
+  amountCode : string;
+  form: FormGroup;
+  individualTotal : number[] = [];
+  tempValIndividualCount : number=0;
+  totalAmount : number=0;
+  tempValTotalCount : number=0;
+  
+  amountvalue : string;
+  constructor(private fb : FormBuilder) { }
+  ngOnInit() {
+    this.form = this.fb.group({
+      'persons': this.fb.array([
+        this.initPerson()
       ])
     });
   }
-  // findIndividualTotal(){
-  //   var temp = parseInt(this.tcode);
-  //   this.individualTotal = temp;
-  //   this.previousValue = this.individualTotal;
-  //   console.log(this.individualTotal);
-  // }
-  // countIndividualTotal(){
-  //   var temp = parseInt(this.tcode);
-  //   if(this.individualTotal!=this.previousValue){
-  //     this.individualTotal +=temp;
-  //   }
-  //   else{
-  //     this.individualTotal =this.previousValue;
-  //   }
-  // }
-  addMoreExpense(){
-    (this.personsForm.get('howMuch') as FormArray).push(
-      this.fb.control(null)
-    );
+  send(value){
+    this.addIndividualTotalAmount(value);
   }
-  addMorePerson(){
+  addIndividualTotalAmount(val){
     var i;
-    var limit = parseInt(this.tcode);
-    for(i=0;i<limit;i++){
-      (this.personsForm.get('person') as FormArray).push(
-        this.fb.control(null)
-      )
+    var j;
+    for(i=0;i<val.persons.length;i++){
+      this.tempValIndividualCount=0;
+      for(j=0;j<val.persons[i].howMuchs.length;j++){
+        this.tempValIndividualCount += parseInt(val.persons[i].howMuchs[j].howMuch);
+      }
+      this.individualTotal[i] = this.tempValIndividualCount;
     }
   }
-  removeExpense() {
-    (this.personsForm.get('howMuch') as FormArray).removeAt(1);
+  countTotalAmount(){
+    var i;
+    this.tempValTotalCount = 0;
+    for(i=0;i<this.individualTotal.length;i++){
+      this.tempValTotalCount += this.individualTotal[i];
+    } 
+    this.totalAmount = this.tempValTotalCount;
   }
-
-  getExpenseFormControls(): AbstractControl[] {
-    return (<FormArray> this.personsForm.get('howMuch')).controls
+  initPerson() {
+    return this.fb.group({
+      'personName': ['', [Validators.required]],
+      'howMuchs': this.fb.array([
+        this.initAmount()
+      ])
+    })
   }
-  getPersonFormControls(): AbstractControl[] {
-    return (<FormArray> this.personsForm.get('person')).controls
+  initAmount() {
+    return this.fb.group({
+      'howMuch': ['', [Validators.required, Validators.pattern('[0-9]{4}')]],
+    })
   }
-  ngOnInit() {
+  addPerson() {
+    var i;
+    var temp = parseInt(this.tcode);
+    temp = temp/10;
+    const control = <FormArray>this.form.controls['persons'];
+    for(i=0;i<temp;i++){
+      control.push(this.initPerson());   
+    }
   }
-
+  addAmount(index) {
+    const control = (<FormArray>this.form.controls['persons']).at(index).get('howMuchs') as FormArray;
+      control.push(this.initAmount());  
+  }
+  deleteAmount(indexH,indexP){
+    this.individualTotal[indexP]-=parseInt(this.form.value.persons[indexP].howMuchs[indexH].howMuch);
+    const control = (<FormArray>this.form.controls['persons']).at(indexP).get('howMuchs') as FormArray;
+    control.removeAt(indexH);
+  }
 }

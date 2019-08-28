@@ -10,12 +10,12 @@
                     <input type="number" (input)="tcode=$event.target.value" class="form-control" name="expensor" placeholder="No. of Persons" min="0" max="5" maxlength="5"/>
                 </div>
                 <div class="col-md-4">
-                    <button (click)="addMorePerson()" class="btn btn-outline-primary add_person_btn">Add More</button>
+                    <button (click)="addPerson()" class="btn btn-outline-primary add_person_btn">Add More</button>
                 </div>
             </div>
             <div class="row form_body w-100">
                 <div class="col-md-6">
-                    <form [formGroup]="personsForm">
+                    <!-- <form [formGroup]="personsForm">
                         <div class="person_card form-group" *ngFor="let person of getPersonFormControls(); let i = index">
                             <div class="row py-2">
                                 <div class="col-md-8">
@@ -25,7 +25,7 @@
                                     <span>{{individualTotal}}</span>
                                 </div>
                             </div>
-                            <div class="row py-2" *ngFor="let howMuch of getExpenseFormControls(); let i = index">
+                            <div class="row py-2" *ngFor="let howMuch of getExpenseFormControls(); let j = index">
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="forWhat" placeholder="For What?"/>
                                 </div>
@@ -40,10 +40,46 @@
                                 </div>
                             </div>
                         </div>
+                    </form> -->
+                    <form [formGroup]="form">
+                        <div formArrayName="persons">
+                          <div *ngFor="let person of form['controls'].persons['controls']; let i=index" class="person_card form-group">
+                            <h4>Person {{i+1}}</h4>
+                            <div formGroupName="{{i}}">
+                              <div class="row">  
+                                <div class="col-md-8">
+                                    <input type="text" formControlName="personName" class="form-control" placeholder="Person's Name">
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="individual_total_amount">&#x20B9;{{individualTotal[i]}}</span>
+                                </div>
+                              </div>
+                              <div formArrayName="howMuchs">
+                                <div *ngFor="let howMuch of person['controls'].howMuchs['controls']; let j=index">
+                                    <div formGroupName="{{j}}">
+                                        <div class="row amounts_row">
+                                            <div class="col-md-5">
+                                                <input type="text" class="form-control" placeholder="Pay for what">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" (keyup)="send(form.value);countTotalAmount()" formControlName="howMuch"  class="form-control"
+                                                placeholder="Amount Paid" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" (click)="deleteAmount(j,i)" class="btn btn-danger delete_amount">&#10006;</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button style="margin:10px 0;" (click)="addAmount(i)" class="btn btn-primary" value="Add Expense">Add Expense</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                     </form>
                     <div class="total_amount">
                         <p class="float-left">Total Amount: </p>
-                        <span class="float-right">220</span>
+                        <span class="float-right">{{totalAmount}}</span>
                     </div>
                 </div>
                 <div class="col-md-6">

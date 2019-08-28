@@ -2,4 +2,5 @@
 body {
     background-image: url('https://assets.themortgagereports.com/wp-content/themes/community_updated/public/img/bg_header-bubble.svg');
     background-size: cover;
+    background-attachment: fixed;
 }
