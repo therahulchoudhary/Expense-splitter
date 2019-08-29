@@ -28,7 +28,7 @@
 }
 .report_card {
     width: 80%;
-    margin: 40px auto;
+    margin: 30px auto;
     background: #E2F6FE;
     padding: 5px;
     border: 1px solid #b5e9fc;
@@ -58,8 +58,12 @@
     padding-top:8px;
 }
 .delete_amount {
-    font-size: 12px;
-    padding:4px 10px;
+    font-size: 16px;
+    padding:4px 5px;
+    margin-right: 20px;
+    background:transparent;
+    color: red;
+    border:0;
 }
 .individual_total_amount {
     float: right;
@@ -76,4 +80,11 @@ button {
     font-size: 13px;
     padding:3px 20px; 
     border-radius:25px;
+}
+.add_person_btn {
+    position: absolute;
+    top:0;
+    right:0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }

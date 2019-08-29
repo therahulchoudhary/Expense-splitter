@@ -6,11 +6,9 @@
                 <div class="col-md-12">
                     <h5>How many persons paid?</h5>
                 </div>
-                <div class="col-md-8">
-                    <input type="number" (input)="tcode=$event.target.value" class="form-control" name="expensor" placeholder="No. of Persons" min="0" max="5" maxlength="5"/>
-                </div>
-                <div class="col-md-4">
-                    <button (click)="addPerson()" class="btn btn-outline-primary add_person_btn">Add More</button>
+                <div class="col-md-8" style="padding-right: 0">
+                    <input type="text" (input)="tcode=$event.target.value" class="form-control" name="expensor" placeholder="No. of Persons" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                    <button (click)="addPerson()" class="btn btn-primary add_person_btn">Add More</button>
                 </div>
             </div>
             <div class="row form_body w-100">
@@ -43,8 +41,8 @@
                     </form> -->
                     <form [formGroup]="form">
                         <div formArrayName="persons">
-                          <div *ngFor="let person of form['controls'].persons['controls']; let i=index" class="person_card form-group">
-                            <h4>Person {{i+1}}</h4>
+                          <div *ngFor="let person of form['controls'].persons['controls'];let i=index" class="person_card form-group">
+                            <h4>{{form.value.persons[i].personName}}</h4>
                             <div formGroupName="{{i}}">
                               <div class="row">  
                                 <div class="col-md-8">
@@ -58,15 +56,15 @@
                                 <div *ngFor="let howMuch of person['controls'].howMuchs['controls']; let j=index">
                                     <div formGroupName="{{j}}">
                                         <div class="row amounts_row">
-                                            <div class="col-md-5">
+                                            <div class="col-md-4" style="padding-right:0;">
                                                 <input type="text" class="form-control" placeholder="Pay for what">
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4">
                                                 <input type="text" (keyup)="send(form.value);countTotalAmount()" formControlName="howMuch"  class="form-control"
                                                 placeholder="Amount Paid" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
-                                            <div class="col-md-2">
-                                                <button type="button" (click)="deleteAmount(j,i)" class="btn btn-danger delete_amount">&#10006;</button>
+                                            <div class="col-md-4">
+                                                <button type="button" (click)="deleteAmount(j,i)" class="delete_amount float-right">&#10005;</button>
                                             </div>
                                         </div>
                                     </div>
@@ -77,19 +75,36 @@
                           </div>
                         </div>
                     </form>
+                    <!-- <div class="text-right">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div> -->
+                </div>
+                <div class="col-md-6">
                     <div class="total_amount">
                         <p class="float-left">Total Amount: </p>
                         <span class="float-right">{{totalAmount}}</span>
                     </div>
-                </div>
-                <div class="col-md-6">
+                    <button (click)="calculateExpense();">CLick to test </button>
                     <div class="report_card">
                         <div class="row" style="padding:0 10px;">
                             <div class="col-md-12 who_pays_how_much">
                                 Who pays whom how much:
                             </div>
                         </div>
-                        <div class="row amount_paid" style="padding:0 10px;">
+                        <div class="row amount_paid" *ngFor="let p of pendingamount;let i=index" style="padding:0 10px;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>{{form.value.persons[i].personName}}</p>
+                                </div>
+                                <div class="col-md-4 amount_value">
+                                    <p>{{pendingamount[i]}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>{{opponent}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row amount_paid" style="padding:0 10px;">
                             <div class="col-md-4">
                                 <p>Person 1</p>
                             </div>
@@ -99,18 +114,7 @@
                             <div class="col-md-4">
                                 <p>Person 2</p>
                             </div>
-                        </div>
-                        <div class="row amount_paid" style="padding:0 10px;">
-                            <div class="col-md-4">
-                                <p>Person 1</p>
-                            </div>
-                            <div class="col-md-4 amount_value">
-                                <p>amount</p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Person 2</p>
-                            </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

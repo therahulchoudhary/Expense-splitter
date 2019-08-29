@@ -13,7 +13,10 @@ export class SplitFormComponent implements OnInit {
   individualTotal : number[] = [];
   tempValIndividualCount : number=0;
   totalAmount : number=0;
+  averageAmount : number = 0;
   tempValTotalCount : number=0;
+  pendingamount : number[] = [];
+  opponent : string[] = [];
   
   amountvalue : string;
   constructor(private fb : FormBuilder) { }
@@ -33,7 +36,13 @@ export class SplitFormComponent implements OnInit {
     for(i=0;i<val.persons.length;i++){
       this.tempValIndividualCount=0;
       for(j=0;j<val.persons[i].howMuchs.length;j++){
-        this.tempValIndividualCount += parseInt(val.persons[i].howMuchs[j].howMuch);
+        let howMuchValue = val.persons[i].howMuchs[j].howMuch;
+        if(howMuchValue.length>0){
+          this.tempValIndividualCount += parseInt(howMuchValue);
+        }
+        else{
+          this.tempValIndividualCount += 0;
+        }
       }
       this.individualTotal[i] = this.tempValIndividualCount;
     }
@@ -45,6 +54,7 @@ export class SplitFormComponent implements OnInit {
       this.tempValTotalCount += this.individualTotal[i];
     } 
     this.totalAmount = this.tempValTotalCount;
+    console.log(this.form.value.persons[0].personName);
   }
   initPerson() {
     return this.fb.group({
@@ -62,19 +72,91 @@ export class SplitFormComponent implements OnInit {
   addPerson() {
     var i;
     var temp = parseInt(this.tcode);
-    temp = temp/10;
     const control = <FormArray>this.form.controls['persons'];
     for(i=0;i<temp;i++){
       control.push(this.initPerson());   
     }
   }
   addAmount(index) {
+
     const control = (<FormArray>this.form.controls['persons']).at(index).get('howMuchs') as FormArray;
       control.push(this.initAmount());  
   }
   deleteAmount(indexH,indexP){
-    this.individualTotal[indexP]-=parseInt(this.form.value.persons[indexP].howMuchs[indexH].howMuch);
+    var tempDeleteIndividualValue = this.form.value.persons[indexP].howMuchs[indexH].howMuch;
+    var tempTotalAmount = this.form.value.persons[indexP].howMuchs[indexH].howMuch;
+    if(tempTotalAmount.length>0){
+      this.totalAmount -=parseInt(tempTotalAmount);
+    }
+    else{
+      this.totalAmount -= 0;
+    }
+    if(tempDeleteIndividualValue.length>0){
+      this.individualTotal[indexP]-=parseInt(tempDeleteIndividualValue);
+    }
+    else{
+      this.individualTotal[indexP]-= 0;
+    }
     const control = (<FormArray>this.form.controls['persons']).at(indexP).get('howMuchs') as FormArray;
     control.removeAt(indexH);
+  }
+   createNewKeyValuePair(){
+     var columns = this.form.value.persons;
+     var rows = this.individualTotal;
+     var result =  rows.reduce(function(result, field, index) {
+      result[columns[index].personName] = field;
+      return result;
+     }, {});
+     return result;
+   }
+  calculateExpense() {
+    // var i;
+    // var j;
+    // this.averageAmount = this.totalAmount/this.individualTotal.length;
+    // for(i=0;i<this.form.value.persons.length;i++){
+    //   if(this.averageAmount===this.individualTotal[i]){
+    //     this.pendingamount[i]=0;
+    //   }
+    //   else{
+    //     this.pendingamount[i]=this.individualTotal[i]-this.averageAmount;
+    //     for(j=1;j<this.form.value.persons.length;j++){
+    //       if(this.averageAmount<this.individualTotal[j]){
+    //         // this.pendingamount[i]+=this.individualTotal[j]-this.averageAmount;
+    //         this.opponent[i]=this.form.value.persons[j].personName;
+    //       }
+    //     }
+    //   }
+    // }
+    console.log(this.createNewKeyValuePair());
+    function splitPayments(payments) {
+      const people = Object.keys(payments);
+      const valuesPaid = Object.values(payments);
+    
+      const sum = valuesPaid.reduce((acc, curr) => curr + acc);
+      const mean = sum / people.length;
+    
+      const sortedPeople = people.sort((personA, personB) => payments[personA] - payments[personB]);
+      const sortedValuesPaid = sortedPeople.map((person) => payments[person] - mean);
+    
+      let i = 0;
+      let j = sortedPeople.length - 1;
+      let debt;
+    
+      while (i < j) {
+        debt = Math.min(-(sortedValuesPaid[i]), sortedValuesPaid[j]);
+        sortedValuesPaid[i] += debt;
+        sortedValuesPaid[j] -= debt;
+    
+        console.log(`${sortedPeople[i]} owes ${sortedPeople[j]} $${debt}`);
+    
+        if (sortedValuesPaid[i] === 0) {
+          i++;
+        }
+    
+        if (sortedValuesPaid[j] === 0) {
+          j--;
+        }
+      }
+    }
   }
 }
