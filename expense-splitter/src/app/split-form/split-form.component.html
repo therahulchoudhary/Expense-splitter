@@ -6,9 +6,15 @@
                 <div class="col-md-12">
                     <h5>How many persons paid?</h5>
                 </div>
-                <div class="col-md-8" style="padding-right: 0">
+                <div class="col-md-8" >
                     <input type="text" (input)="tcode=$event.target.value" class="form-control" name="expensor" placeholder="No. of Persons" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                     <button (click)="addPerson()" class="btn btn-primary add_person_btn">Add More</button>
+                </div>
+                <div class="col-md-4">
+                    <div class="total_amount">
+                        <p>Total Amount: </p>
+                        <span class="float-right">{{totalAmount}}</span>
+                    </div>
                 </div>
             </div>
             <div class="row form_body w-100">
@@ -60,7 +66,7 @@
                                                 <input type="text" class="form-control" placeholder="Pay for what">
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" (keyup)="send(form.value);countTotalAmount()" formControlName="howMuch"  class="form-control"
+                                                <input type="text" (keyup)="send(form.value);countTotalAmount();calculateExpense()" formControlName="howMuch"  class="form-control"
                                                 placeholder="Amount Paid" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
                                             <div class="col-md-4">
@@ -80,27 +86,28 @@
                     </div> -->
                 </div>
                 <div class="col-md-6">
-                    <div class="total_amount">
-                        <p class="float-left">Total Amount: </p>
-                        <span class="float-right">{{totalAmount}}</span>
+                    <div class="right_aside_content" *ngIf="showReportButton">
+                        <h3>What to Do?</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet voluptate vero esse hic rerum ducimus tempora at sequi corrupti commodi, perferendis fugit quo quas totam excepturi libero architecto illo! Temporibus.</p>
+                        <button class="final_calculate_result"  (click)="splitPayments(mergedArray)">click</button>
                     </div>
-                    <button (click)="calculateExpense();">CLick to test </button>
-                    <div class="report_card">
+                    
+                    <div class="report_card" *ngIf="reportCardShow">
                         <div class="row" style="padding:0 10px;">
                             <div class="col-md-12 who_pays_how_much">
                                 Who pays whom how much:
                             </div>
                         </div>
-                        <div class="row amount_paid" *ngFor="let p of pendingamount;let i=index" style="padding:0 10px;">
+                        <div class="amount_paid" *ngFor="let p of payersArray;let i=index"  style="padding:0 10px;">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <p>{{form.value.persons[i].personName}}</p>
+                                    <p>{{p.payer}}</p>
                                 </div>
                                 <div class="col-md-4 amount_value">
-                                    <p>{{pendingamount[i]}}</p>
+                                    <p>{{p.amount}}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p>{{opponent}}</p>
+                                    <p>{{p.payee}}</p>
                                 </div>
                             </div>
                         </div>

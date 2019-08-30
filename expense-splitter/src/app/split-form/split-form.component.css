@@ -27,7 +27,7 @@
     padding-left: 15px;
 }
 .report_card {
-    width: 80%;
+    width: 87%;
     margin: 30px auto;
     background: #E2F6FE;
     padding: 5px;
@@ -53,6 +53,21 @@
     color:#579cb5;
     background: #c3e0eb;
     text-align: center;
+}
+.amount_value:after,.amount_value:before {
+    content: "";
+    position: absolute;
+    left: 100%;
+    width: 20px;
+    height: 50%;
+}
+.amount_value:before {
+    top: 0px;
+    background: linear-gradient(to top right, #c3e0eb 50%, transparent 51%);
+}
+.amount_value:after {
+    bottom: 0px;
+    background: linear-gradient(to bottom right, #c3e0eb 50%, transparent 51%);
 }
 .amounts_row {
     padding-top:8px;
@@ -87,4 +102,28 @@ button {
     right:0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+.total_amount {
+    width: 80%;
+    margin:auto;
+    background: #E2F6FE;
+    border: 1px solid #b5e9fc;
+    border-radius: 6px;
+}
+.total_amount p{
+    margin-bottom: 0;
+    display: inline;
+    padding:5px 15px;
+}
+.total_amount span {
+    padding:0 15px;
+}
+.right_aside_content {
+    width:60%;
+    text-align: center;
+    margin:auto;
+    padding-top: 75px;
+}
+.right_aside_content p{
+    text-align: justify;
 }

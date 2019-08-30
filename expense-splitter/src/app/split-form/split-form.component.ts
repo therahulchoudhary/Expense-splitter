@@ -17,7 +17,11 @@ export class SplitFormComponent implements OnInit {
   tempValTotalCount : number=0;
   pendingamount : number[] = [];
   opponent : string[] = [];
-  
+  mergedArray : any;  
+  payersArray : any[] =[];
+  reportCardShow : boolean = false;
+  showReportButton : boolean = true;
+
   amountvalue : string;
   constructor(private fb : FormBuilder) { }
   ngOnInit() {
@@ -100,19 +104,19 @@ export class SplitFormComponent implements OnInit {
     const control = (<FormArray>this.form.controls['persons']).at(indexP).get('howMuchs') as FormArray;
     control.removeAt(indexH);
   }
-   createNewKeyValuePair(){
+  createNewKeyValuePair(){
      var columns = this.form.value.persons;
      var rows = this.individualTotal;
      var result =  rows.reduce(function(result, field, index) {
       result[columns[index].personName] = field;
       return result;
      }, {});
-     return result;
+    return result;
    }
   calculateExpense() {
     // var i;
     // var j;
-    // this.averageAmount = this.totalAmount/this.individualTotal.length;
+    this.averageAmount = this.totalAmount/this.individualTotal.length;
     // for(i=0;i<this.form.value.persons.length;i++){
     //   if(this.averageAmount===this.individualTotal[i]){
     //     this.pendingamount[i]=0;
@@ -127,36 +131,45 @@ export class SplitFormComponent implements OnInit {
     //     }
     //   }
     // }
-    console.log(this.createNewKeyValuePair());
-    function splitPayments(payments) {
-      const people = Object.keys(payments);
-      const valuesPaid = Object.values(payments);
+    this.mergedArray = this.createNewKeyValuePair();
+    console.log(this.mergedArray,"merged array");
+    console.log(this.averageAmount,"averageamount");  
+  }
+  splitPayments(var_array) {
+    const people = Object.keys(var_array);
+    const sortedPeople = people.sort((personA, personB) => var_array[personA] - var_array[personB]);
+    console.log(sortedPeople);
+    const sortedValuesPaid = sortedPeople.map((person) => var_array[person] - this.averageAmount);
+    this.reportCardShow = true;
+    this.showReportButton = false;
     
-      const sum = valuesPaid.reduce((acc, curr) => curr + acc);
-      const mean = sum / people.length;
-    
-      const sortedPeople = people.sort((personA, personB) => payments[personA] - payments[personB]);
-      const sortedValuesPaid = sortedPeople.map((person) => payments[person] - mean);
-    
-      let i = 0;
-      let j = sortedPeople.length - 1;
-      let debt;
-    
-      while (i < j) {
-        debt = Math.min(-(sortedValuesPaid[i]), sortedValuesPaid[j]);
-        sortedValuesPaid[i] += debt;
-        sortedValuesPaid[j] -= debt;
-    
-        console.log(`${sortedPeople[i]} owes ${sortedPeople[j]} $${debt}`);
-    
-        if (sortedValuesPaid[i] === 0) {
-          i++;
-        }
-    
-        if (sortedValuesPaid[j] === 0) {
-          j--;
-        }
+    let i = 0;
+    let j = sortedPeople.length - 1;
+    let debt;
+  
+    while (i < j) {
+      var payersObject = {
+        payer:"",
+        payee:"",
+        amount:""
+      }
+      debt = Math.min(-(sortedValuesPaid[i]), sortedValuesPaid[j]);
+      sortedValuesPaid[i] += debt;
+      sortedValuesPaid[j] -= debt;
+     
+      console.log(`${sortedPeople[i]} owes ${sortedPeople[j]} ${debt}`);
+      payersObject.payer = sortedPeople[i];
+      payersObject.payee = sortedPeople[j];
+      payersObject.amount = debt;
+      this.payersArray.push(payersObject);
+      if (sortedValuesPaid[i] === 0) {
+        i++;
+      }
+  
+      if (sortedValuesPaid[j] === 0) {
+        j--;
       }
     }
-  }
+    console.log(this.payersArray);  
+  }  
 }
