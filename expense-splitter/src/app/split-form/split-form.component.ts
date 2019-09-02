@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl,Validators } from '@angular/forms';
 
+import paginate from '../pagination.util';
 @Component({
   selector: 'app-split-form',
   templateUrl: './split-form.component.html',
@@ -21,6 +22,12 @@ export class SplitFormComponent implements OnInit {
   payersArray : any[] =[];
   reportCardShow : boolean = false;
   showReportButton : boolean = true;
+  private currentPage = 1;
+  private pages: Array<number>;
+  private startIndex: number;
+  private endIndex: number;
+  private pageSize : number;
+  private maxPages : number;
 
   amountvalue : string;
   constructor(private fb : FormBuilder) { }
@@ -30,6 +37,7 @@ export class SplitFormComponent implements OnInit {
         this.initPerson()
       ])
     });
+    this.calculateIndexes();
   }
   send(value){
     this.addIndividualTotalAmount(value);
@@ -80,11 +88,11 @@ export class SplitFormComponent implements OnInit {
     for(i=0;i<temp;i++){
       control.push(this.initPerson());   
     }
+    this.calculateIndexes();
   }
   addAmount(index) {
-
     const control = (<FormArray>this.form.controls['persons']).at(index).get('howMuchs') as FormArray;
-      control.push(this.initAmount());  
+    control.push(this.initAmount());  
   }
   deleteAmount(indexH,indexP){
     var tempDeleteIndividualValue = this.form.value.persons[indexP].howMuchs[indexH].howMuch;
@@ -171,5 +179,37 @@ export class SplitFormComponent implements OnInit {
       }
     }
     console.log(this.payersArray);  
-  }  
+  } 
+  calculateIndexes() {
+    const pagination = paginate(
+      this.form.value.persons.length,
+      this.currentPage,
+      this.pageSize,
+      this.maxPages
+    );
+    this.currentPage = pagination.currentPage;
+    this.pages = pagination.pages;
+    this.startIndex = pagination.startIndex;
+    this.endIndex = pagination.endIndex;
+    console.log('wdff',this.currentPage,this.pages,this.startIndex,this.endIndex);
+
+  }
+
+  previous(e) {
+    e.preventDefault();
+    this.currentPage--;
+    this.calculateIndexes();
+  }
+
+  next(e) {
+    e.preventDefault();
+    this.currentPage++;
+    this.calculateIndexes();
+  }
+
+  setCurrent(e, page) {
+    e.preventDefault();
+    this.currentPage = page;
+    this.calculateIndexes();
+  } 
 }

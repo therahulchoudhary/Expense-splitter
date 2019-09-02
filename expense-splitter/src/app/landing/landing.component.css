@@ -5,11 +5,12 @@
     box-shadow: 0 0 10px lightgrey;
     border-radius: 15px;
     padding-bottom: 30px;
-    background-image: url('https://upload.wikimedia.org/wikipedia/wikimania2014/7/7a/WM_Main_background_v5.svg');
-    background-size: cover;
 }
 .header_logo {
-    padding: 15px 0;
+    margin:auto;
+    background: linear-gradient(#b5e9fc),url('../../assets/header_background.jpg') no-repeat center;
+    background-blend-mode: multiply;
+    background-size: cover;
 }
 .header_logo p {
     text-align: center;
@@ -17,11 +18,12 @@
 }
 .header_logo h1 {
     font-weight: bold;
-    padding:40px 0;
+    padding:100px 0;
     color:black;
 }
 .after_header {
     margin:auto;
+    padding:60px 0;
 }
 hr {
     background-image: linear-gradient(90deg,transparent,lightgrey, transparent);
@@ -30,17 +32,69 @@ hr {
 }
 .tagline_heading {
     text-align: center;
-    font-size: 24px;
+    font-size: 28px;
     padding: 15px 0;
     font-weight: thin;
     margin-bottom: 0;
+}
+.blockquote {
+    text-align: center;
+    padding: 30px 0;
 }
 .about {
     margin:20px auto;
     text-align: center;
 }
-.description,
-.create_btn  {
+/* how it works style */
+.how_it_works {
+    margin: auto;
+}
+.how_it_works h3 {
+    text-align: center;
+    padding:20px 0;
+}
+.details_icon {
+    width: 10%;
     margin:auto;
-    padding: 40px 0;
+}
+.details_icon img{
+    width: 100%;
+}
+.details_heading h4{
+    width: 100%;
+    padding:20px 0;
+    text-align: center;
+}
+.details_body {
+    text-align: center;
+    width: 70%;
+    margin:auto;
+}
+/* why choose us style */
+.why_choose_us {
+    margin:auto;
+    text-align: center;
+}
+.why_choose_us h6 {
+    padding:25px 0; 
+}
+.why_choose_us h3 {
+    text-align: center;
+    padding:20px 0;
+}
+.choose_details_heading {
+    width: 100%;
+    text-align: center;
+}
+.choose_details_body {
+    width:80%;
+    margin: auto;
+}
+/* footer style */
+.footer span{
+    width: 100%;
+    text-align: center;
+}
+.footer img{
+    width: 25px;
 }

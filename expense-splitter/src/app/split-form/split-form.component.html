@@ -1,127 +1,143 @@
 <section>
     <div class="main_body">
         <section class="form container">
-            <h1>Calculate Your expense</h1>
-            <div class="row form_decide w-100 form-group">
-                <div class="col-md-12">
-                    <h5>How many persons paid?</h5>
-                </div>
-                <div class="col-md-8" >
-                    <input type="text" (input)="tcode=$event.target.value" class="form-control" name="expensor" placeholder="No. of Persons" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
-                    <button (click)="addPerson()" class="btn btn-primary add_person_btn">Add More</button>
-                </div>
-                <div class="col-md-4">
-                    <div class="total_amount">
-                        <p>Total Amount: </p>
-                        <span class="float-right">{{totalAmount}}</span>
+            <div class="heading_div">
+                <h1>Calculate Your expense</h1>
+            </div>
+            <div class="form_body_container">
+                <div class="row form_decide w-100 form-group">
+                    <div class="col-md-12">
+                        <h5>How many persons paid?</h5>
+                    </div>
+                    <div class="col-md-8" >
+                        <input type="text" (input)="tcode=$event.target.value" class="form-control" name="expensor" placeholder="No. of Persons" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                        <button (click)="addPerson()" class="btn btn-primary add_person_btn">Add More</button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="total_amount">
+                            <p>Total Amount: </p>
+                            <span class="float-right">{{totalAmount}}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row form_body w-100">
-                <div class="col-md-6">
-                    <!-- <form [formGroup]="personsForm">
-                        <div class="person_card form-group" *ngFor="let person of getPersonFormControls(); let i = index">
-                            <div class="row py-2">
-                                <div class="col-md-8">
-                                    <input type="text" [formControl]="person" class="form-control" name="personName" placeholder="Person 1"/>
+                <div class="row form_body w-100">
+                    <div class="col-md-6">
+                        <!-- <form [formGroup]="personsForm">
+                            <div class="person_card form-group" *ngFor="let person of getPersonFormControls(); let i = index">
+                                <div class="row py-2">
+                                    <div class="col-md-8">
+                                        <input type="text" [formControl]="person" class="form-control" name="personName" placeholder="Person 1"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span>{{individualTotal}}</span>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <span>{{individualTotal}}</span>
+                                <div class="row py-2" *ngFor="let howMuch of getExpenseFormControls(); let j = index">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="forWhat" placeholder="For What?"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" [formControl]="howMuch" class="form-control" placeholder="How Much" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                    </div>
+                                </div>
+                                <div class="row py-2">
+                                    <div class="col-md-12">
+                                        <button (click)="addMoreExpense()" class="btn btn-primary">Add More</button>
+                                        <button (click)="removeExpense(i)" class="btn btn-danger">Remove Expense</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row py-2" *ngFor="let howMuch of getExpenseFormControls(); let j = index">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="forWhat" placeholder="For What?"/>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" [formControl]="howMuch" class="form-control" placeholder="How Much" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
-                                </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-md-12">
-                                    <button (click)="addMoreExpense()" class="btn btn-primary">Add More</button>
-                                    <button (click)="removeExpense(i)" class="btn btn-danger">Remove Expense</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form> -->
-                    <form [formGroup]="form">
-                        <div formArrayName="persons">
-                          <div *ngFor="let person of form['controls'].persons['controls'];let i=index" class="person_card form-group">
-                            <h4>{{form.value.persons[i].personName}}</h4>
-                            <div formGroupName="{{i}}">
-                              <div class="row">  
-                                <div class="col-md-8">
-                                    <input type="text" formControlName="personName" class="form-control" placeholder="Person's Name">
-                                </div>
-                                <div class="col-md-4">
-                                    <span class="individual_total_amount">&#x20B9;{{individualTotal[i]}}</span>
-                                </div>
-                              </div>
-                              <div formArrayName="howMuchs">
-                                <div *ngFor="let howMuch of person['controls'].howMuchs['controls']; let j=index">
-                                    <div formGroupName="{{j}}">
-                                        <div class="row amounts_row">
-                                            <div class="col-md-4" style="padding-right:0;">
-                                                <input type="text" class="form-control" placeholder="Pay for what">
+                        </form> -->
+                        <form [formGroup]="form">
+                            <div formArrayName="persons">
+                            <div *ngFor="let person of form['controls'].persons['controls'];let i=index" >
+                                <div *ngIf="i >= startIndex && i <= endIndex" class="person_card form-group">
+                                    <h4>Person {{i+1}}</h4>
+                                    <div formGroupName="{{i}}">
+                                        <div class="row">  
+                                            <div class="col-md-8">
+                                                <input type="text" formControlName="personName" class="form-control" placeholder="Person's Name">
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" (keyup)="send(form.value);countTotalAmount();calculateExpense()" formControlName="howMuch"  class="form-control"
-                                                placeholder="Amount Paid" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <span class="individual_total_amount">&#x20B9;{{individualTotal[i]}}</span>
                                             </div>
-                                            <div class="col-md-4">
-                                                <button type="button" (click)="deleteAmount(j,i)" class="delete_amount float-right">&#10005;</button>
+                                        </div>
+                                        <div formArrayName="howMuchs">
+                                            <div *ngFor="let howMuch of person['controls'].howMuchs['controls']; let j=index">
+                                                <div formGroupName="{{j}}">
+                                                    <div class="row amounts_row">
+                                                        <div class="col-md-4" style="padding-right:0;">
+                                                            <input type="text" class="form-control" placeholder="Pay for what">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" (keyup)="send(form.value);countTotalAmount();calculateExpense()" formControlName="howMuch"  class="form-control"
+                                                            placeholder="Amount Paid" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                                        </div>
+                                                        <div class="col-md-4" *ngIf="j>0">
+                                                            <button type="button" (click)="deleteAmount(j,i)" class="delete_amount float-right">&#10005;</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <button style="margin:10px 0;" (click)="addAmount(i)" class="btn btn-primary" value="Add Expense">Add Expense</button>
                                         </div>
                                     </div>
                                 </div>
-                                <button style="margin:10px 0;" (click)="addAmount(i)" class="btn btn-primary" value="Add Expense">Add Expense</button>
-                              </div>
                             </div>
-                          </div>
+                            </div>
+                        </form>
+                        <div *ngIf="pages.length > 1">
+                            <a href="" (click)="previous($event)">{{ previousLabel }}</a>
+                            <span *ngFor="let page of pages">
+                                <span *ngIf="page === currentPage" href="" (click)="setCurrent($event,page)">{{page}}</span>
+                                <a *ngIf="page !== currentPage" href="" (click)="setCurrent($event,page)">{{page}}</a>
+                            </span>
+                            <a href="" (click)="next($event)">{{ nextLabel }}</a>
                         </div>
-                    </form>
-                    <!-- <div class="text-right">
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                    </div> -->
-                </div>
-                <div class="col-md-6">
-                    <div class="right_aside_content" *ngIf="showReportButton">
-                        <h3>What to Do?</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet voluptate vero esse hic rerum ducimus tempora at sequi corrupti commodi, perferendis fugit quo quas totam excepturi libero architecto illo! Temporibus.</p>
-                        <button class="final_calculate_result"  (click)="splitPayments(mergedArray)">click</button>
+                        <!-- <div class="text-right">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div> -->
                     </div>
-                    
-                    <div class="report_card" *ngIf="reportCardShow">
-                        <div class="row" style="padding:0 10px;">
-                            <div class="col-md-12 who_pays_how_much">
-                                Who pays whom how much:
+                    <div class="col-md-6">
+                        <div class="right_aside_content" *ngIf="showReportButton">
+                            <div class="right_aside_content_inner">
+                                <h3>Who paid what?</h3>
+                                <p>Enter the names and how much everyone spent for the group.Add more expenses with the <b>"Add Expense"</b>, Remove them with the <b>"X"</b></p>
+                                <button class="btn btn-primary final_calculate_result"  (click)="splitPayments(mergedArray)">Calculate</button>
                             </div>
                         </div>
-                        <div class="amount_paid" *ngFor="let p of payersArray;let i=index"  style="padding:0 10px;">
-                            <div class="row">
+                        
+                        <div class="report_card" *ngIf="reportCardShow">
+                            <div class="row" style="padding:0 10px;">
+                                <div class="col-md-12 who_pays_how_much">
+                                    Who pays whom how much:
+                                </div>
+                            </div>
+                            <div class="amount_paid" *ngFor="let p of payersArray;let i=index"  style="padding:0 10px;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>{{p.payer}}</p>
+                                    </div>
+                                    <div class="col-md-4 amount_value">
+                                        <p>{{p.amount}}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>{{p.payee}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row amount_paid" style="padding:0 10px;">
                                 <div class="col-md-4">
-                                    <p>{{p.payer}}</p>
+                                    <p>Person 1</p>
                                 </div>
                                 <div class="col-md-4 amount_value">
-                                    <p>{{p.amount}}</p>
+                                    <p>amount</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p>{{p.payee}}</p>
+                                    <p>Person 2</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <!-- <div class="row amount_paid" style="padding:0 10px;">
-                            <div class="col-md-4">
-                                <p>Person 1</p>
-                            </div>
-                            <div class="col-md-4 amount_value">
-                                <p>amount</p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Person 2</p>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>

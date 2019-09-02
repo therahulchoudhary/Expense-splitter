@@ -1,7 +1,7 @@
 <div class="main_body">
     <header>
-        <div class="row">
-            <div class="col-md-12 col-12 header_logo">
+        <div class="row header_logo">
+            <div class="col-md-12 col-12">
                 <p><a href="#"><h1>Expense Splitter</h1></a></p>
             </div>
         </div>
@@ -11,25 +11,56 @@
             <div class="col-md-12 tagline">
                 <h3 class="tagline_heading">Split bills for shared group expenses</h3>
             </div>
+            <div class="col-md-12 blockquote">
+                <div>
+                    <p>It's Simple and Totally free</p>
+                    <button routerLink="/splitform" class="btn btn-primary">Create Expense</button>
+                </div>
+            </div>
             <div class="col-md-12 about">
                 <p class="about_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis omnis corrupti repellat nobis pariatur quasi veniam perferendis libero ullam totam praesentium, reiciendis laboriosam voluptatum, culpa temporibus numquam quaerat doloribus tempore.</p>
             </div>
         </div>
         <hr>
-        <div class="row description w-75">
-            <div class="col-md-6 description_img">
-                <img width="100%" src="http://www.keyline.co.za/wp-content/uploads/2015/11/imac.png"/>
+        <div class="row how_it_works w-75">
+            <div class="col-md-12 col-12">
+                <h3>How it works?</h3>
             </div>
-            <div class="col-md-6 description_details">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero nisi tempora ipsa error, itaque quisquam repudiandae sapiente temporibus ullam nam, officiis in, numquam tempore quos fugit saepe animi voluptates mollitia.
+            <div class="col-md-6 how_it_works_details">
+                <div class="details_icon"><img src="../../assets/plus.svg"/></div>
+                <div class="details_heading"><h4>ADD</h4></div> 
+                <div class="details_body"><p>Click on Create Expense! to enter your buddies names and expenses in our cool interface.</p></div>
+            </div>
+            <div class="col-md-6 how_it_works_details">
+                <div class="details_icon"><img src="../../assets/balance.svg"/></div>
+                <div class="details_heading"><h4>SPLIT</h4></div> 
+                <div class="details_body"><p>Our algorithm splits expenses and calculates who owes whom with simplified transactions.</p></div>
             </div>
         </div>
-        <div class="row create_btn w-75">
-            <div class="col-md-12">
-                <div style="text-align: center;">
-                    <button routerLink="/splitform" class="btn btn-primary">Create Expense</button>
+        <hr>
+        <div class="row why_choose_us w-75">
+            <div class="col-md-12 col-12">
+                <h3>Why choose us?</h3>
+            </div>
+            <div class="col-md-6 why_choose_us_details">
+                <div class="row">
+                    <div class="choose_details_heading"><h4>Split In Seconds</h4></div> 
+                    <div class="choose_details_body"><p>No signup or registration required, which means splitting expenses has never been easier</p></div>
                 </div>
             </div>
+            <div class="col-md-6 why_choose_us_details">
+                <div class="row">
+                    <div class="choose_details_heading"><h4>Easy To Use</h4></div> 
+                    <div class="choose_details_body"><p>Simple interface to add expenses which will save the trouble of dealing with unnecessary buttons</p></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h6>And it's totally free</h6>
+            </div>
+        </div>
+        <hr>
+        <div class="row footer">
+            <span>Made With <img src="../../assets/heart.gif"/>by <a href="https://therahulchoudhary.github.io">Rahul Choudhary</a></span>
         </div>
     </section>
 </div>

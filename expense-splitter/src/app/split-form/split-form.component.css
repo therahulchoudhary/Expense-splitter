@@ -2,9 +2,28 @@
     width: 70%;
     margin: 20px auto;
     background:white;
-    box-shadow: 0 0 10px lightgrey;
-    border-radius: 15px;
+    box-shadow: 0 0 10px skyblue;
+    /* border-radius: 15px; */
     padding-bottom: 30px;
+}
+.form {
+    padding:0;
+}
+.heading_div {
+    background: linear-gradient(#b5e9fc),url('../../assets/header_background.jpg') no-repeat center;
+    background-blend-mode: multiply;
+    background-size: cover;
+    padding:60px 0;
+}
+.form_body_container {
+    width:95%;
+    margin : auto;
+    margin-top: -60px;
+    background:white;
+    padding:20px 0;
+    border:0.5px solid lightgrey;
+    border-radius: 5px;
+    overflow: hidden;
 }
 /* form styling */
 .form h1 {
@@ -19,7 +38,8 @@
 .person_card {
     margin: 30px auto;
     padding: 10px;
-    box-shadow: 0 0 15px lightgrey;
+    /* box-shadow: 0 0 15px lightgrey; */
+    border:1px solid lightgrey;
     border-radius: 6px;
 }
 .person_card h4 {
@@ -27,8 +47,8 @@
     padding-left: 15px;
 }
 .report_card {
-    width: 87%;
-    margin: 30px auto;
+    width: 100%;
+    margin: 30px 0;
     background: #E2F6FE;
     padding: 5px;
     border: 1px solid #b5e9fc;
@@ -99,13 +119,14 @@ button {
 .add_person_btn {
     position: absolute;
     top:0;
-    right:0;
+    right:15px;
+    outline:0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 .total_amount {
     width: 80%;
-    margin:auto;
+    margin-left:auto;
     background: #E2F6FE;
     border: 1px solid #b5e9fc;
     border-radius: 6px;
@@ -119,11 +140,28 @@ button {
     padding:0 15px;
 }
 .right_aside_content {
-    width:60%;
+    width:110%;
     text-align: center;
     margin:auto;
-    padding-top: 75px;
+    margin-top: 40px;
+    padding-top: 60px;
+    background: url('../../assets/right_aside_background.svg');
+    background-size: cover;
 }
-.right_aside_content p{
+.right_aside_content_inner {
+    width:60%;
+    margin:auto;
+}
+.right_aside_content_inner p {
+    line-height: 2.5;
+    font-size: 18px;
+}
+.final_calculate_result {
+    padding:5px 20px;
+    width: 60%;
+    font-weight: bold;
+    font-size: 14px;
+}
+/* .right_aside_content p{
     text-align: justify;
-}
+} */
