@@ -10,10 +10,7 @@
     padding:0;
 }
 .heading_div {
-    background: linear-gradient(#b5e9fc),url('../../assets/header_background.jpg') no-repeat center;
-    background-blend-mode: multiply;
-    background-size: cover;
-    padding:60px 0;
+    padding:20px 0;
 }
 .form_body_container {
     width:95%;
@@ -70,7 +67,7 @@
     text-align: center;
 }
 .amount_value {
-    color:#579cb5;
+    /* color:#579cb5; */
     background: #c3e0eb;
     text-align: center;
 }
@@ -145,7 +142,6 @@ button {
     margin:auto;
     margin-top: 40px;
     padding-top: 60px;
-    background: url('../../assets/right_aside_background.svg');
     background-size: cover;
 }
 .right_aside_content_inner {

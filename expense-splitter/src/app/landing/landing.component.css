@@ -2,15 +2,16 @@
     width: 70%;
     margin: 20px auto;
     background:white;
-    box-shadow: 0 0 10px lightgrey;
-    border-radius: 15px;
     padding-bottom: 30px;
 }
-.header_logo {
-    margin:auto;
-    background: linear-gradient(#b5e9fc),url('../../assets/header_background.jpg') no-repeat center;
-    background-blend-mode: multiply;
+.top_header {
+    cursor: default;
+
+}
+.header_logo{
     background-size: cover;
+    text-decoration: none;
+    border-bottom: 1px solid lightgrey;
 }
 .header_logo p {
     text-align: center;
@@ -18,12 +19,16 @@
 }
 .header_logo h1 {
     font-weight: bold;
-    padding:100px 0;
+    padding:20px 0;
     color:black;
+    font-size: 42px;
+}
+.header_logo a{
+    cursor: default;
 }
 .after_header {
     margin:auto;
-    padding:60px 0;
+    padding:14px 0 0 0;
 }
 hr {
     background-image: linear-gradient(90deg,transparent,lightgrey, transparent);
@@ -40,18 +45,27 @@ hr {
 .blockquote {
     text-align: center;
     padding: 30px 0;
+    margin:0;
 }
 .about {
     margin:20px auto;
     text-align: center;
 }
+.about_paragraph {
+    font-size: 18px;
+    padding:20px 0 0 0;
+    width: 70%;
+    margin:auto;
+    text-align: center;
+    line-height: 28px;
+}
 /* how it works style */
 .how_it_works {
     margin: auto;
 }
-.how_it_works h3 {
+.how_it_works h2 {
     text-align: center;
-    padding:20px 0;
+    padding:40px 0;
 }
 .details_icon {
     width: 10%;
@@ -60,15 +74,17 @@ hr {
 .details_icon img{
     width: 100%;
 }
-.details_heading h4{
+.details_heading h3{
     width: 100%;
     padding:20px 0;
     text-align: center;
 }
-.details_body {
+.details_body p{
     text-align: center;
     width: 70%;
     margin:auto;
+    font-size: 16px;
+    padding:10px 0;
 }
 /* why choose us style */
 .why_choose_us {
@@ -78,17 +94,24 @@ hr {
 .why_choose_us h6 {
     padding:25px 0; 
 }
-.why_choose_us h3 {
+.why_choose_us h2 {
     text-align: center;
-    padding:20px 0;
+    padding:40px 0;
 }
 .choose_details_heading {
     width: 100%;
     text-align: center;
 }
-.choose_details_body {
-    width:80%;
+.choose_details_heading h4 {
+    font-size: 20px;
+}
+.choose_details_body p{
+    width:70%;
     margin: auto;
+    padding:10px 0;
+}
+.choose_details_body p {
+    font-size: 16px;
 }
 /* footer style */
 .footer span{
@@ -97,4 +120,10 @@ hr {
 }
 .footer img{
     width: 25px;
+}
+.style_background{
+    height:65vh;
+    background:linear-gradient(#6AC0F1, #27C3AC);
+    margin:-65vh;
+    z-index: -10;
 }

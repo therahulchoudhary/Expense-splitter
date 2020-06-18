@@ -1,66 +1,72 @@
-<div class="main_body">
+<div class="ui container p-0">
     <header>
-        <div class="row header_logo">
-            <div class="col-md-12 col-12">
-                <p><a href="#"><h1>Expense Splitter</h1></a></p>
-            </div>
+        <div class="header_logo ui pointing menu container mt-3" style="height:100px;display: flex;justify-content: center;align-items: center;">
+            <img src="../../assets/logo.png" width="160px" height="60px"/>
         </div>
     </header>
     <section id="landing">
-        <div class="row after_header w-75">
-            <div class="col-md-12 tagline">
-                <h3 class="tagline_heading">Split bills for shared group expenses</h3>
-            </div>
-            <div class="col-md-12 blockquote">
-                <div>
-                    <p>It's Simple and Totally free</p>
-                    <button routerLink="/splitform" class="btn btn-primary">Create Expense</button>
+        <div class="row after_header ui column grid">
+            <div class="ui segment">
+                <div class="col-md-12 tagline">
+                    <h3 class="tagline_heading">Split bills for shared group expenses</h3>
+                </div>
+                <div class="col-md-12 blockquote">
+                    <div>
+                        <p>It's Simple and Totally free</p>
+                        <div class="ui teal labeled icon button my-4" routerLink="splitform">
+                            Create New Expense
+                            <i class="add icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 about">
+                    <p class="about_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis omnis corrupti repellat nobis pariatur quasi veniam perferendis libero ullam totam praesentium, reiciendis laboriosam voluptatum, culpa temporibus numquam quaerat doloribus tempore.</p>
                 </div>
             </div>
-            <div class="col-md-12 about">
-                <p class="about_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis omnis corrupti repellat nobis pariatur quasi veniam perferendis libero ullam totam praesentium, reiciendis laboriosam voluptatum, culpa temporibus numquam quaerat doloribus tempore.</p>
-            </div>
         </div>
-        <hr>
-        <div class="row how_it_works w-75">
+        <div class="row how_it_works ui grid column">
             <div class="col-md-12 col-12">
-                <h3>How it works?</h3>
+                <h2>How it works?</h2>
             </div>
             <div class="col-md-6 how_it_works_details">
+                <div class="ui segment">
                 <div class="details_icon"><img src="../../assets/plus.svg"/></div>
-                <div class="details_heading"><h4>ADD</h4></div> 
+                <div class="details_heading"><h3>ADD</h3></div> 
                 <div class="details_body"><p>Click on Create Expense! to enter your buddies names and expenses in our cool interface.</p></div>
+                </div>
             </div>
             <div class="col-md-6 how_it_works_details">
+                <div class="ui segment">
                 <div class="details_icon"><img src="../../assets/balance.svg"/></div>
-                <div class="details_heading"><h4>SPLIT</h4></div> 
+                <div class="details_heading"><h3>SPLIT</h3></div> 
                 <div class="details_body"><p>Our algorithm splits expenses and calculates who owes whom with simplified transactions.</p></div>
+                </div>
             </div>
         </div>
-        <hr>
-        <div class="row why_choose_us w-75">
+        <div class="row why_choose_us">
             <div class="col-md-12 col-12">
-                <h3>Why choose us?</h3>
+                <h2>Why choose us?</h2>
             </div>
             <div class="col-md-6 why_choose_us_details">
-                <div class="row">
-                    <div class="choose_details_heading"><h4>Split In Seconds</h4></div> 
-                    <div class="choose_details_body"><p>No signup or registration required, which means splitting expenses has never been easier</p></div>
+                <div class="row ui segments">
+                    <div class="choose_details_heading ui segment secondary"><h4>Split In Seconds</h4></div> 
+                    <div class="choose_details_body ui segment"><p>No signup or registration required, which means splitting expenses has never been easier</p></div>
                 </div>
             </div>
             <div class="col-md-6 why_choose_us_details">
-                <div class="row">
-                    <div class="choose_details_heading"><h4>Easy To Use</h4></div> 
-                    <div class="choose_details_body"><p>Simple interface to add expenses which will save the trouble of dealing with unnecessary buttons</p></div>
+                <div class="row ui segments">
+                    <div class="choose_details_heading ui secondary segment"><h4>Easy To Use</h4></div> 
+                    <div class="choose_details_body ui segment"><p>Simple interface to add expenses which will save the trouble of dealing with unnecessary buttons</p></div>
                 </div>
             </div>
             <div class="col-md-12">
-                <h6>And it's totally free</h6>
+                <h6><span class="ui label green">And it's totally free</span></h6>
             </div>
         </div>
-        <hr>
         <div class="row footer">
-            <span>Made With <img src="../../assets/heart.gif"/>by <a href="https://therahulchoudhary.github.io">Rahul Choudhary</a></span>
+            <span>Made With <img src="../../assets/heart.gif"/> by <a href="https://therahulchoudhary.github.io">Rahul Choudhary</a></span>
         </div>
     </section>
+</div>
+<div class="style_background">
 </div>

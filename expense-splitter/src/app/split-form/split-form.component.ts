@@ -144,6 +144,7 @@ export class SplitFormComponent implements OnInit {
     console.log(this.averageAmount,"averageamount");  
   }
   splitPayments(var_array) {
+    this.payersArray = [];
     const people = Object.keys(var_array);
     const sortedPeople = people.sort((personA, personB) => var_array[personA] - var_array[personB]);
     console.log(sortedPeople);
@@ -178,7 +179,7 @@ export class SplitFormComponent implements OnInit {
         j--;
       }
     }
-    console.log(this.payersArray);  
+    console.log(this.payersArray);
   } 
   calculateIndexes() {
     const pagination = paginate(
